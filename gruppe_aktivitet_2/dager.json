@@ -1,0 +1,16 @@
+{
+    "mandag" : 
+        {
+            "10:00" : ["Donald", "Dolly"],
+            "11:00" : ["Onkel Skrue"],
+            "12:00" : ["Ole", "Dole", "Doffen"]
+        },
+    "tirsdag" :    
+        {
+            "10:00" : ["Anton"],
+            "11:00" : ["Mikke","Minni"],
+            "12:00" : ["Bestemor", "Guffen"]
+        }
+
+}
+

@@ -1,0 +1,38 @@
+[
+    {
+        "name" : "Industri og bergverk",
+        "category" : "05,07,08,09.9,10-33 Industri og bergverk",
+        "tot_energibruk": {
+            "GWh_2024" : 76756,
+            "prosent_2023-2024" : -0.3            
+        },
+        "energi_kost" : {
+            "mill.kr_2023-2024" : 34911,
+            "prosent_2023-2024" : -9.2
+        }
+    },
+    {
+        "name" : "Bergverk",
+        "category" : "05,07,08,09.9 Bergverk",
+        "tot_energibruk": {
+            "GWh_2024" : 1153,
+            "prosent_2023-2024" : -8.5       
+        },
+        "energi_kost" : {
+            "mill.kr_2023-2024" : 1231,
+            "prosent_2023-2024" : -8.5
+        }
+    },
+    {
+        "name" : "Industri",
+        "category" : "10-33 Industri",
+        "tot_energibruk": {
+            "GWh_2024_2024" : 75603,
+            "prosent_2023-2024" : -0.2             
+        },
+        "energi_kost" : {
+            "mill.kr_2023-2024" : 33680,
+            "prosent_2023-2024" : -9.2
+        }
+    }
+]

@@ -1,0 +1,18 @@
+[
+    {
+        "input": "Pingu in the city",
+        "expected": 5
+    },
+    {
+        "input": "Frieren: Beyond Journey's End",
+        "expected": 9
+    },
+    {
+        "input": "Programming",
+        "expected": 3
+    },
+    {
+        "input": "Hmm",
+        "expected": 0
+    }
+]

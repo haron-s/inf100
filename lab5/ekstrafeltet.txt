@@ -1,0 +1,10 @@
+La til en start modus, en pause modus og en game over modus
+
+La til knapper for main menu, pause og game over
+
+Gjorde sånn at add_apple_at_random_location funksjonen bytter logikk for å prøve å plassere et eple etter et hvis antall forsøk så programmet skal kjøre raskere når det er få gyldige plasser igjen
+
+Program viser informasjon vanskelighetsgrad
+Program viser score, forrige score og topp score. Lagret til en json fil ettersom du spiller
+
+I main menu kan du velge vanskelighetsgrad og slette json filen med scores hvis du ønsker det

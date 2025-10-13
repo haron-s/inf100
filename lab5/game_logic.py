@@ -1,15 +1,18 @@
 from move_snake_helpers import get_next_head_position, subtract_one_from_all_positives
 import random
+from score import save_score
 
 def move_snake(app):
     app.head_pos= get_next_head_position(app.head_pos, app.direction)
     if not is_legal_move(app.head_pos, app.board):
         app.state = "gameover"
+        save_score(app.score)
         return
     
     if app.board[app.head_pos[0]][app.head_pos[1]] == -1:
         add_apple_at_random_location(app.board)
         app.snake_size += 1
+        app.score += 1
     subtract_one_from_all_positives(app.board)
 
     row, col = app.head_pos

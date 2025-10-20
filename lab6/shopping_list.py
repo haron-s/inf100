@@ -1,7 +1,12 @@
 def shopping_list_to_dict(shopping_list):
-    shop_list = [foodnum for foodnum in shopping_list.split("\n")]
-    return {foodname: num for foodnum in foodnum.split(" ") for foodnum in shop_list}
-    
+    return dict(
+        (name, int(quantitiy))
+        for quantitiy, name in (
+            element.split(" ")
+            for element in shopping_list.split("\n")
+            if element.strip()
+            )
+        )
 def test_shopping_list_to_dict():
     print('Tester shopping_list_to_dict... ', end='')
     arg = '2 brød\n3 pizza\n10 poteter\n1 kaffe\n1 ost\n14 epler\n'

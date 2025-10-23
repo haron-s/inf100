@@ -17,6 +17,7 @@ def shopping_list_file_to_dict(path):
         print(f"Error: file '{path}' not found.")
         return {}
 
+
 def test_shopping_list_to_dict():
     print('Tester shopping_list_to_dict... ', end='')
     arg = '2 brød\n3 pizza\n10 poteter\n1 kaffe\n1 ost\n14 epler\n'

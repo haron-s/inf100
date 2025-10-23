@@ -1,6 +1,16 @@
+from pathlib import Path
+
 def add_asterisks(s):
     asterisk = "*;*".join(s.split(";"))
     return f"*{asterisk}*"
+
+def add_asterisks_csv(org_file, new_file):
+    source_path = Path(org_file)
+    destination_path = Path(new_file)
+    file_content = source_path.read_text(encoding="utf-8")
+    
+    modified_content = [add_asterisks(line) for line in file_content.splitlines()]
+    destination_path.write_text("\n".join(modified_content),encoding="utf-8")
 
 def test_add_asterisks():
     print('Testing add_asterisks...', end='')
@@ -19,4 +29,26 @@ def test_add_asterisks():
 
     print('OK')
 
+def test_add_asterisks_csv():
+    print('Testing add_asterisks_csv...', end='')
+
+    infile = '.tmp.add_asterisks_csv_test.in.csv'
+    outfile = '.tmp.add_asterisks_csv_test.out.csv'
+
+    Path(infile).write_text((
+        'foo;bar;qux\n'
+        'honey;mustard;sausage\n'
+    ), encoding='utf-8')
+
+    add_asterisks_csv(infile, outfile)
+    actual = Path(outfile).read_text(encoding='utf-8')
+    expected = (
+        '*foo*;*bar*;*qux*\n'
+        '*honey*;*mustard*;*sausage*\n'
+    )
+    assert expected.strip() == actual.strip()
+
+    print('OK')
+
 test_add_asterisks()
+test_add_asterisks_csv()

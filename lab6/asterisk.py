@@ -5,12 +5,10 @@ def add_asterisks(s):
     return f"*{asterisk}*"
 
 def add_asterisks_csv(org_file, new_file):
-    source_path = Path(org_file)
-    destination_path = Path(new_file)
-    file_content = source_path.read_text(encoding="utf-8")
+    file_content = Path(org_file).read_text(encoding="utf-8")
     
     modified_content = [add_asterisks(line) for line in file_content.splitlines()]
-    destination_path.write_text("\n".join(modified_content),encoding="utf-8")
+    Path(new_file).write_text("\n".join(modified_content),encoding="utf-8")
 
 def test_add_asterisks():
     print('Testing add_asterisks...', end='')

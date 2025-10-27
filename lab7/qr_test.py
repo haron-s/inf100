@@ -206,9 +206,47 @@ def test_get_next_pos_9x9():
     assert expected == actual
     print(' OK')
 
-test_get_next_pos_basic()
-test_get_next_pos_5x5()
-test_get_next_pos_9x9()
+def test_bit_list_to_raw_matrix():
+    print('Testing bit_list_to_raw_matrix...', end='')
+    # To make the test easier to read, bit_list contain distinct elements here
+    # (in actual applications, bit_list would only have 0's and 1's)
+    arg_bit_list = list(range(1, 72))
+    arg_qr_layout = {
+        'about': 'A fake and incomplete QR layout for testing only',
+        'side_length': 9,
+        'fixed_positions': {
+            'ones': [
+                [1, 3], [1, 4], 
+            ],
+            'zeros': [
+                [2, 3], [2, 4],
+            ]
+        },
+        'meta_positions': {
+            'first': [
+                [5, 2], [5, 3]
+            ],
+            'second': [
+                [6, 2], [6, 3]
+            ]
+        }
+        # key 'meta_patterns' skipped, since it is irrelevant for this task
+    }
+
+    expected = [
+        [ 0, 50, 49, 48, 47, 20, 19, 18, 17],
+        [ 0, 52, 51,  0,  0, 22, 21, 16, 15],
+        [71, 54, 53,  0,  0, 24, 23, 14, 13],
+        [70, 56, 55, 46, 45, 26, 25, 12, 11],
+        [69, 58, 57, 44, 43, 28, 27, 10,  9],
+        [68, 59,  0,  0, 42, 30, 29,  8,  7],
+        [67, 60,  0,  0, 41, 32, 31,  6,  5],
+        [66, 62, 61, 40, 39, 34, 33,  4,  3],
+        [65, 64, 63, 38, 37, 36, 35,  2,  1]
+    ]
+    actual = bit_list_to_raw_matrix(arg_bit_list, arg_qr_layout)
+    assert expected == actual
+    print(' OK')
 
 if __name__ == '__main__':
     # sample_grid = [
@@ -233,3 +271,7 @@ if __name__ == '__main__':
     test_set_meta_fields()
     test_get_masked_matrix()
     test_score_matrix()
+    test_get_next_pos_basic()
+    test_get_next_pos_5x5()
+    test_get_next_pos_9x9()
+    test_bit_list_to_raw_matrix()

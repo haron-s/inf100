@@ -1,5 +1,13 @@
 from pathlib import Path
 
+def get_impact(line):
+    line = line.split(";")
+
+    try:
+        return float(line[2])
+    except ValueError:
+        pass
+    
 def safe_float(value):
     try:
         return float(value)
@@ -12,14 +20,6 @@ def string_to_list(string):
         for id, location, impact, time in (line.split(";") for line in string.splitlines())
     ]
     return earthquake_list
-
-def get_impact(line):
-    line = line.split(";")
-
-    try:
-        return float(line[2])
-    except ValueError:
-        pass
 
 def filter_earthquakes(earthquake_csv_string, threshold):
     earthquake_list = string_to_list(earthquake_csv_string)

@@ -1,6 +1,4 @@
 from pathlib import Path
-text = Path("data.txt").read_text(encoding="utf-8")
-Path("data.txt").write_text("tekst" ,encoding="utf-8")
 
 def filter_wordlist(path, search_string):
     file_content = Path(path).read_text(encoding="utf-8")

@@ -2,6 +2,7 @@ from qr1_draw import *
 from qr2_matrix_completion import *
 from qr3_masking import *
 from qr4_zigzag import *
+from qr5_bit_list import *
 
 def test_set_fixed_fields():
     print('Testing set_fixed_fields...', end='')
@@ -248,6 +249,61 @@ def test_bit_list_to_raw_matrix():
     assert expected == actual
     print(' OK')
 
+def test_string_to_data():
+    print('Testing string_to_data...', end='')
+    assert [0,1,0,0,0,0,0,1] == string_to_data('A')
+    assert [0,1,0,0,0,0,0,1,0,1,0,0,0,0,1,1] == string_to_data('AC')
+    foo = [0,1,1,0,0,1,1,0,0,1,1,0,1,1,1,1,0,1,1,0,1,1,1,1]
+    assert foo == string_to_data('foo')
+    print(' OK')
+
+def test_get_core_bit_list():
+    print('Testing get_core_bit_list...', end='')
+    arg = 'hei'
+    expected_head = [0, 1, 0, 0]
+    expected_len = [0, 0, 0, 0, 0, 0, 1, 1] # 3 in binary
+    expected_data = [int(x) for x in '011010000110010101101001']
+    expected_term = [0, 0, 0, 0]
+    expected = expected_head + expected_len + expected_data + expected_term
+
+    actual = get_core_bit_list(arg)
+    assert expected == actual
+    print(' OK')
+
+def test_get_core_bit_list():
+    print('Testing get_core_bit_list...', end='')
+    arg = 'hei'
+    expected_head = [0, 1, 0, 0]
+    expected_len = [0, 0, 0, 0, 0, 0, 1, 1] # 3 in binary
+    expected_data = [int(x) for x in '011010000110010101101001']
+    expected_term = [0, 0, 0, 0]
+    expected = expected_head + expected_len + expected_data + expected_term
+    
+    actual = get_core_bit_list(arg)
+    assert expected == actual
+    print(' OK')
+
+def test_pad_bit_list():
+    print('Testing pad_bit_list...', end='')
+    PAD1 = (1, 1, 1, 0, 1, 1, 0, 0)
+    PAD2 = (0, 0, 0, 1, 0, 0, 0, 1)
+    
+    arg = [1, 1, 1, 1, 1, 1, 1, 1]
+    expected = arg + list(PAD1) + list(PAD2) + list(PAD1)
+    pad_bit_list(arg, 4)
+    assert expected == arg
+
+    arg = [1, 1, 1, 1, 1, 1, 1, 1]
+    expected = arg + list(PAD1) + list(PAD2) + list(PAD1) + list(PAD2)
+    pad_bit_list(arg, 5)
+    assert expected == arg
+
+    arg = [1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1]
+    expected = arg + list(PAD1) + list(PAD2) + list(PAD1) + list(PAD2)
+    pad_bit_list(arg, 6)
+    assert expected == arg
+    print(' OK')
+
 if __name__ == '__main__':
     # sample_grid = [
     #     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -275,3 +331,6 @@ if __name__ == '__main__':
     test_get_next_pos_5x5()
     test_get_next_pos_9x9()
     test_bit_list_to_raw_matrix()
+    test_string_to_data()
+    test_get_core_bit_list()
+    test_pad_bit_list()

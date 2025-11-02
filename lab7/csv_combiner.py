@@ -1,13 +1,26 @@
 import csv
 from pathlib import Path
-import io
 import os
 
 def combine_csv_in_dir(dirpath, result_path):
     folder = Path(dirpath)
+
+    headers = None
+    data = []
     for file in folder.glob("*.csv"):
-        csv_file = csv.reader(Path(file).read_text(encoding="utf-8"))
-        
+        with open(file, "r", encoding="utf-8") as f:
+            reader = csv.reader(f)
+            if not headers:
+                headers = next(reader)
+                data.extend(reader)
+            else:
+                next(reader)
+                data.extend(reader)
+    with open(result_path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f, delimiter=",", lineterminator="\n")
+        writer.writerow(headers)
+        writer.writerows(data)
+
 
 print("Tester combine_csv_in_dir... ", end="")
 # Mappen samples må ligge i samme mappe som denne filen

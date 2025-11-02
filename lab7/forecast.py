@@ -1,4 +1,3 @@
-import json
 import requests
 
 def weather_in_bergen_next_hour():

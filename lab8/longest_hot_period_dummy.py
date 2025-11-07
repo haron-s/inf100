@@ -1,5 +1,3 @@
-
-
 def longest_hot_period(temperatures, threshold):
     i_array, i_list = [], []
     for i, temp in enumerate(temperatures):
@@ -18,9 +16,6 @@ def longest_hot_period(temperatures, threshold):
         longest_period = (-1, -1)
 
     return longest_period
-
-    
-            
 
 def test_longest_hot_period():
     print('Testing longest_hot_period... ', end='')

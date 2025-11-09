@@ -20,7 +20,7 @@ def index_value_getter(a):
     for i in range(len(a)):
         print(a[i])
 
-    print("\nDictionary keys/value:")
+    print("\nList indices/value:")
     for i, value in enumerate(a):
         print(f'{i} {value}')
     

@@ -1,30 +1,43 @@
-import requests
-import json
+from datetime import datetime, timedelta
 from pathlib import Path
+from longest_hot_period_realdata_helper import *
+import requests
 
-client_id = Path('client_id.txt').read_text(encoding='utf-8').strip()
 api_endpoint = 'https://frost.met.no/observations/v0.jsonld'
 source_id = 'SN50540' # SN50540 er Florida målestasjon i Bergen
 
-response = requests.get(
-    api_endpoint,
-    params={
-        'sources': source_id,
-        'referencetime': '2024-04-01/2024-04-07',
-        'elements': 'mean(air_temperature P1D)',
-        'levels': 'default',
-        'timeoffsets': 'default',
-    },
-    headers={'User-Agent': 'inf100.ii.uib.no student'},
-    auth=(client_id, '')
-)
+def response(client_id, source_id, start_date, end_date):
+    start = f'{start_date.year}-{start_date.month}-{start_date.day}'
+    end = f'{end_date.year}-{end_date.month}-{end_date.day}'
+    response = requests.get(
+        api_endpoint,
+        params={
+            'sources': source_id,
+            'referencetime': f'{start}/{end}',
+            'elements': 'mean(air_temperature P1D)',
+            'levels': 'default',
+            'timeoffsets': 'default',
+        },
+        headers={'User-Agent': 'inf100.ii.uib.no student'},
+        auth=(client_id, '')
+    )
 
-json_data = response.json()
-from pathlib import Path
-from datetime import datetime
+    return response.json()
 
 def longest_hot_period(client_id, source_id, start_date, end_date, threshold):
-    ... # din kode her
+    json_data = response(client_id, source_id, start_date, end_date)
+
+    temperatures = [
+        json_data["data"][i]["observations"][0]["value"]
+        for i in range(len(json_data["data"]))
+        ]
+    
+    longest_period = hot_period(temperatures, threshold)
+    
+    start = convert(json_data["data"][longest_period[0]]["referenceTime"][0:10])
+    end = convert(json_data["data"][longest_period[-1]]["referenceTime"][0:10]) + timedelta(days=1)
+
+    return start, end
 
 def test_longest_hot_period():
     client_id = Path('client_id.txt').read_text(encoding='utf-8').strip()

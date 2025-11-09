@@ -5,7 +5,7 @@ def count_facilities_by_species(path):
         data = list(csv.reader(csvfile, delimiter=";"))
     
     species_sum = {}
-    for row in data[1:]:
+    for row in data[2:]:
         species = row[12]
         try:
             species_sum[species] += 1
